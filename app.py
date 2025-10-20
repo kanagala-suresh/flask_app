@@ -1,14 +1,16 @@
-from flask import Flask,render_template,request
+import os
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route('/')
 def home():
     return render_template('index.html')
-@app.route('/greet',methods= ['POST'])
+
+@app.route('/greet', methods=['POST'])
 def greet():
     name = request.form['name']
-    return f"hi {name} ,welcome brodie!"
+    return f"Hi {name}, welcome brodie!"
 
-if __name__=='__main__':
-    app.run(debug = True)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)), debug=True)
